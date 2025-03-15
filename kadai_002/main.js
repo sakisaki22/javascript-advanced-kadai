@@ -91,12 +91,21 @@ const rankCheck = score => {
 //ゲームを終了
 const gameOver = id => {
     clearInterval(id);
+
+    //タイムアップメッセージを表示
+    wrap.textContent = 'タイムアップ!';
+    typeCountField.textContent = '';
+    untypedfield.textContent = 'タイムアップ!';
+
+    //少しの遅延を入れてからランクを確認
+    setTimeout(() => {
     const result = confirm(rankCheck(score));
 
     //OKボタンをクリックされたらリロードする
     if(result == true) {
         window.location.reload();
     }
+    }, 1000);
 };
 
 //カウントダウンタイマー
@@ -111,7 +120,7 @@ const timer = () => {
         if(time <= 0){
             gameOver(id);
         }
-    }, 1000);
+    }, 10);
 };
 
 //ゲームスタート時の処理
